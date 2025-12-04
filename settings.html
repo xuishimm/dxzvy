@@ -16,7 +16,7 @@
       color: white;
     }
 
-    /* Falling shapes */
+   
     .shape {
       position: fixed;
       top: -100px;
@@ -33,7 +33,7 @@
       to { transform: translateY(120vh) rotate(360deg); }
     }
 
-    /* Settings container */
+    
     .settings-box {
       width: 85%;
       max-width: 700px;
@@ -72,7 +72,7 @@
       transform: scale(1.03);
     }
 
-    /* Bottom bar */
+    
     .bottom-bar {
       position: fixed;
       bottom: 20px;
@@ -104,7 +104,7 @@
 </head>
 <body>
 
-<!-- SETTINGS CARD -->
+
 <div class="settings-box">
   <h1>Settings</h1>
 
@@ -114,7 +114,7 @@
   <button class="setting-btn" onclick="customCloak()">Custom Cloak</button>
 </div>
 
-<!-- BOTTOM BAR -->
+
 <div class="bottom-bar">
   <a href="g.html"><img src="https://www.svgrepo.com/show/326649/game-controller-outline.svg"></a>
   <a href="apps.html"><img src="https://t3.ftcdn.net/jpg/15/88/15/36/360_F_1588153698_7iJuiX3nGooQmQf7piMer4Y7oUYJWrU4.webp"></a>
@@ -124,7 +124,7 @@
 </div>
 
 <script>
-/* Falling shapes */
+
 function spawnShape() {
   const shape = document.createElement('div');
   shape.className = 'shape';
@@ -138,7 +138,7 @@ function spawnShape() {
 }
 setInterval(spawnShape, 200);
 
-/* ABOUT:BLANK CLOAKER */
+
 function cloak() {
   const win = window.open("about:blank", "_blank");
   const iframe = win.document.createElement("iframe");
@@ -150,7 +150,7 @@ function cloak() {
   iframe.src = window.location.href;
 }
 
-/* EXPORT DATA */
+
 function exportData() {
   const data = localStorage;
   const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
@@ -160,7 +160,7 @@ function exportData() {
   a.click();
 }
 
-/* IMPORT DATA */
+
 function importData() {
   const input = document.createElement("input");
   input.type = "file";
@@ -180,7 +180,7 @@ function importData() {
   input.click();
 }
 
-/* CUSTOM TITLE + FAVICON */
+
 function customCloak() {
   const title = prompt("Enter new tab title:");
   const icon = prompt("Enter URL for favicon (.ico/.png):");
