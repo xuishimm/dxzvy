@@ -32,11 +32,11 @@
     }
 
     iframe {
-      position: relative;
       width: 100%;
       height: 100vh;
       border: none;
       z-index: 10;
+      position: relative;
     }
 
     
@@ -73,17 +73,16 @@
 
 <iframe id="gameFrame" src=""></iframe>
 
-
 <div class="bottom-bar">
   <a href="g.html">
     <img src="https://www.svgrepo.com/show/326649/game-controller-outline.svg" />
   </a>
   <a href="apps.html">
     <img src="https://t3.ftcdn.net/jpg/15/88/15/36/360_F_1588153698_7iJuiX3nGooQmQf7piMer4Y7oUYJWrU4.webp" />
-</a>
-<a href="ideas.html">
-  <img src="https://static.thenounproject.com/png/2162450-200.png" />
-</a>
+  </a>
+  <a href="ideas.html">
+    <img src="https://static.thenounproject.com/png/2162450-200.png" />
+  </a>
   <a href="index.html">
     <img src="home.svg" />
   </a>
@@ -104,18 +103,20 @@
   }
   setInterval(spawnShape, 200);
 
-
+ 
   const params = new URLSearchParams(window.location.search);
   const game = params.get('game');
 
   const gameMap = {
-    game1: "games/people-playground/index.html",
-    game2: "games/buckshot-roulette/index.html",
+    game1: "games/buckshot-roulette/index.html",
+    game2: "games/people-playground/index.html",
     game3: "games/undertale/index.html"
   };
 
+  const iframe = document.getElementById("gameFrame");
+
   if (game && gameMap[game]) {
-    document.getElementById("gameFrame").src = gameMap[game];
+    iframe.src = gameMap[game];
   } else {
     document.body.innerHTML = "<h1 style='color:white;text-align:center;'>Game not found</h1>";
   }
@@ -123,4 +124,3 @@
 
 </body>
 </html>
-
