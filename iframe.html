@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Viewer</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      overflow: hidden;
+      font-family: 'Poppins', sans-serif;
+      position: relative;
+    }
+
+    
+    .shape {
+      position: fixed;
+      top: -100px;
+      width: 20px;
+      height: 20px;
+      background: rgba(255,255,255,0.2);
+      animation: fall linear infinite;
+      transform: rotate(45deg);
+      border-radius: 4px;
+      z-index: 0;
+    }
+
+    @keyframes fall {
+      to { transform: translateY(120vh) rotate(360deg); }
+    }
+
+    iframe {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      border: none;
+      z-index: 10;
+    }
+
+    
+    .bottom-bar {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,0.07);
+      padding: 12px 25px;
+      border-radius: 20px;
+      display: flex;
+      gap: 25px;
+      backdrop-filter: blur(10px);
+      z-index: 20;
+    }
+
+    .bottom-bar img {
+      width: 35px;
+      height: 35px;
+      filter: invert(1);
+      opacity: 0.9;
+      cursor: pointer;
+      transition: 0.25s;
+    }
+
+    .bottom-bar img:hover {
+      transform: scale(1.15);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+<iframe id="gameFrame" src=""></iframe>
+
+
+<div class="bottom-bar">
+  <a href="g.html"><img src="https://www.svgrepo.com/show/326649/game-controller-outline.svg" alt="Games"></a>
+  <a href="#"><img src="https://static.thenounproject.com/png/2162450-200.png" alt="Other"></a>
+</div>
+
+<script>
+  
+  function spawnShape() {
+    const shape = document.createElement('div');
+    shape.className = 'shape';
+    const size = Math.random() * 25 + 10;
+    shape.style.width = size + 'px';
+    shape.style.height = size + 'px';
+    shape.style.left = Math.random() * 100 + 'vw';
+    shape.style.animationDuration = (Math.random() * 5 + 4) + 's';
+    document.body.appendChild(shape);
+    setTimeout(() => shape.remove(), 10000);
+  }
+  setInterval(spawnShape, 200);
+
+
+  const params = new URLSearchParams(window.location.search);
+  const game = params.get('game');
+
+  const gameMap = {
+    game1: "games/game1.html",
+    game2: "games/game2.html",
+    game3: "games/game3.html"
+  };
+
+  if (game && gameMap[game]) {
+    document.getElementById("gameFrame").src = gameMap[game];
+  } else {
+    document.body.innerHTML = "<h1 style='color:white;text-align:center;'>Game not found</h1>";
+  }
+</script>
+
+</body>
+</html>
