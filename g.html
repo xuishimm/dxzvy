@@ -16,7 +16,7 @@
       position: relative;
     }
 
-    
+  
     .shape {
       position: fixed;
       top: -100px;
@@ -42,7 +42,7 @@
 
     .game-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 20px;
       max-width: 1000px;
       margin: 0 auto;
@@ -50,18 +50,17 @@
       z-index: 10;
     }
 
+
     .game-square {
       background: rgba(255,255,255,0.1);
       border: 2px solid rgba(255,255,255,0.3);
       border-radius: 15px;
-      height: 150px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
       cursor: pointer;
       transition: 0.3s;
       text-align: center;
+      overflow: hidden;
     }
 
     .game-square:hover {
@@ -69,15 +68,19 @@
       border-color: rgba(255,255,255,0.7);
     }
 
+    
     .game-square img {
-      width: 60px;
-      height: 60px;
-      margin-bottom: 10px;
+      width: 100%;
+      height: 100px; 
+      object-fit: cover; 
+      display: block;
+      margin-bottom: 5px;
     }
 
     .game-title {
-      font-size: 0.9rem;
+      font-size: 1rem;
       color: #fff;
+      padding: 10px 5px;
     }
 
     
@@ -116,17 +119,17 @@
 
 <div class="game-container">
   <a href="iframe.html?game=game1" class="game-square">
-    <img src="games/people-playground.png" alt="Game 1">
+    <img src="games/people-playground.png" alt="People Playground">
     <div class="game-title">People Playground</div>
   </a>
 
   <a href="iframe.html?game=game2" class="game-square">
-    <img src="games/buckshot-roulette.png" alt="Game 2">
+    <img src="games/buckshot-roulette.png" alt="Buckshot Roulette">
     <div class="game-title">Buckshot Roulette</div>
   </a>
 
   <a href="iframe.html?game=game3" class="game-square">
-    <img src="games/undertale.png" alt="Game 3">
+    <img src="games/undertale.png" alt="Undertale">
     <div class="game-title">Undertale</div>
   </a>
 </div>
@@ -138,16 +141,17 @@
   </a>
   <a href="apps.html">
     <img src="https://t3.ftcdn.net/jpg/15/88/15/36/360_F_1588153698_7iJuiX3nGooQmQf7piMer4Y7oUYJWrU4.webp" />
-</a>
-<a href="ideas.html">
-  <img src="https://static.thenounproject.com/png/2162450-200.png" />
-</a>
+  </a>
+  <a href="ideas.html">
+    <img src="https://static.thenounproject.com/png/2162450-200.png" />
+  </a>
   <a href="index.html">
     <img src="home.svg" />
   </a>
 </div>
 
 <script>
+  
   function spawnShape() {
     const shape = document.createElement('div');
     shape.className = 'shape';
