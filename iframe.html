@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Game Viewer</title>
+  <title>Study.com | Reader</title>
   <link rel="stylesheet" href="style.css">
   <style>
     body {
@@ -14,7 +14,6 @@
       position: relative;
     }
 
- 
     .shape {
       position: fixed;
       top: -100px;
@@ -31,7 +30,6 @@
       to { transform: translateY(120vh) rotate(360deg); }
     }
 
-
     iframe {
       position: relative;
       width: 90%;
@@ -43,7 +41,6 @@
       z-index: 10;
     }
 
-    /* Bottom bar */
     .bottom-bar {
       position: fixed;
       bottom: 20px;
@@ -77,7 +74,6 @@
 
 <iframe id="gameFrame" src=""></iframe>
 
-
 <div class="bottom-bar">
   <a href="g.html">
     <img src="https://www.svgrepo.com/show/326649/game-controller-outline.svg" alt="Games" />
@@ -91,10 +87,12 @@
   <a href="index.html">
     <img src="home.svg" alt="Home" />
   </a>
+  <a href="settings.html">
+    <img src="setting.svg" />
+  </a>
 </div>
 
 <script>
-  
   function spawnShape() {
     const shape = document.createElement('div');
     shape.className = 'shape';
@@ -109,8 +107,9 @@
   setInterval(spawnShape, 200);
 
   
+
   const params = new URLSearchParams(window.location.search);
-  const game = params.get('game');
+  const gameParam = params.get('game');
 
   const gameMap = {
     game1: "games/people-playground/index.html",
@@ -120,11 +119,18 @@
 
   const iframe = document.getElementById("gameFrame");
 
-  if (game && gameMap[game]) {
-    console.log("Loading game:", gameMap[game]);
-    iframe.src = gameMap[game];
+  if (gameParam in gameMap) {
+    
+    iframe.src = gameMap[gameParam];
+
+  } else if (gameParam && gameParam.endsWith(".html")) {
+    
+    iframe.src = gameParam;
+
   } else {
-    document.body.innerHTML = "<h1 style='color:white;text-align:center;margin-top:40vh;'>Game not found</h1>";
+    
+    document.body.innerHTML =
+      "<h1 style='color:white;text-align:center;margin-top:40vh;'>Game not found</h1>";
   }
 </script>
 
