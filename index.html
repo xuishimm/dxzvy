@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>dxzvy's sanctuary</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="center">
+  <h1>dxzvy's sanctuary</h1>
+
+  <div class="icons">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBdcgkdcDy5z4PYGx_kDJB1AvvC_x1pCBbbQ&s" />
+    <img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" />
+    <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" />
+    <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" />
+    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" />
+  </div>
+
+  <div class="search-box">
+    <input type="text" placeholder="search here" />
+  </div>
+
+
+</div>
+
+<script>
+  function spawnShape() {
+    const shape = document.createElement('div');
+    shape.className = 'shape';
+    const size = Math.random() * 25 + 10;
+    shape.style.width = size + 'px';
+    shape.style.height = size + 'px';
+    shape.style.left = Math.random() * 100 + 'vw';
+    shape.style.animationDuration = (Math.random() * 5 + 4) + 's';
+    document.body.appendChild(shape);
+    setTimeout(() => shape.remove(), 10000);
+  }
+  setInterval(spawnShape, 200);
+</script>
+
+<div class="bottom-bar">
+  <a href="g.html">
+    <img src="https://www.svgrepo.com/show/326649/game-controller-outline.svg" />
+  </a>
+  <a href="apps.html">
+    <img src="https://t3.ftcdn.net/jpg/15/88/15/36/360_F_1588153698_7iJuiX3nGooQmQf7piMer4Y7oUYJWrU4.webp" />
+</a>
+<a href="ideas.html">
+  <img src="https://static.thenounproject.com/png/2162450-200.png" />
+</a>
+</div>
+
+
+</body>
+</html>
