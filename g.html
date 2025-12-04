@@ -1,1 +1,124 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background: #000;
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 20px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Falling shapes */
+    .shape {
+      position: fixed;
+      top: -100px;
+      width: 20px;
+      height: 20px;
+      background: rgba(255,255,255,0.2);
+      animation: fall linear infinite;
+      transform: rotate(45deg);
+      border-radius: 4px;
+      z-index: 0;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(120vh) rotate(360deg);
+      }
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .game-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 10; /* Ensure squares are above shapes */
+    }
+
+    .game-square {
+      background: rgba(255,255,255,0.1);
+      border: 2px solid rgba(255,255,255,0.3);
+      border-radius: 15px;
+      height: 150px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: 0.3s;
+      text-align: center;
+    }
+
+    .game-square:hover {
+      transform: scale(1.05);
+      border-color: rgba(255,255,255,0.7);
+    }
+
+    .game-square img {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 10px;
+    }
+
+    .game-title {
+      font-size: 0.9rem;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+<h1>My Game Collection</h1>
+
+<div class="game-container">
+  <a href="iframe.html?game=game1" class="game-square">
+    <img src="games/game1-icon.png" alt="Game 1">
+    <div class="game-title">Game 1</div>
+  </a>
+
+  <a href="iframe.html?game=game2" class="game-square">
+    <img src="games/game2-icon.png" alt="Game 2">
+    <div class="game-title">Game 2</div>
+  </a>
+
+  <a href="iframe.html?game=game3" class="game-square">
+    <img src="games/game3-icon.png" alt="Game 3">
+    <div class="game-title">Game 3</div>
+  </a>
+</div>
+
+<script>
+  // Falling shapes
+  function spawnShape() {
+    const shape = document.createElement('div');
+    shape.className = 'shape';
+    const size = Math.random() * 25 + 10;
+    shape.style.width = size + 'px';
+    shape.style.height = size + 'px';
+    shape.style.left = Math.random() * 100 + 'vw';
+    shape.style.animationDuration = (Math.random() * 5 + 4) + 's';
+    document.body.appendChild(shape);
+    setTimeout(() => shape.remove(), 10000);
+  }
+  setInterval(spawnShape, 200);
+</script>
+
+</body>
+</html>
