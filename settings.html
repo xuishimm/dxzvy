@@ -1,1 +1,262 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      font-family: 'Poppins', sans-serif;
+      overflow: hidden;
+    }
+
+    .shape {
+      position: fixed;
+      top: -100px;
+      width: 20px;
+      height: 20px;
+      background: rgba(255,255,255,0.2);
+      animation: fall linear infinite;
+      transform: rotate(45deg);
+      border-radius: 4px;
+      z-index: 0;
+    }
+
+    @keyframes fall {
+      to { transform: translateY(120vh) rotate(360deg); }
+    }
+
+    h1 {
+      text-align: center;
+      color: white;
+      margin-top: 30px;
+      z-index: 10;
+      position: relative;
+    }
+
+    .settings-box {
+      max-width: 500px;
+      margin: 40px auto;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      z-index: 10;
+      position: relative;
+    }
+
+    .setting-btn {
+      background: rgba(255,255,255,0.1);
+      padding: 15px;
+      border-radius: 12px;
+      border: 2px solid rgba(255,255,255,0.2);
+      color: white;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: .25s;
+      text-align: center;
+    }
+
+    .setting-btn:hover {
+      background: rgba(255,255,255,0.2);
+      transform: scale(1.05);
+      border-color: rgba(255,255,255,0.6);
+    }
+
+    .bottom-bar {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,0.07);
+      padding: 12px 25px;
+      border-radius: 20px;
+      display: flex;
+      gap: 25px;
+      backdrop-filter: blur(10px);
+      z-index: 20;
+    }
+
+    .bottom-bar img {
+      width: 35px;
+      height: 35px;
+      filter: invert(1);
+      opacity: 0.9;
+      cursor: pointer;
+      transition: 0.25s;
+    }
+
+    .bottom-bar img:hover {
+      transform: scale(1.15);
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Settings</h1>
+
+<div class="settings-box">
+
+  <button class="setting-btn" onclick="cloak()">About:Blank Cloaker</button>
+  <button class="setting-btn" onclick="exportData()">Export Data</button>
+  <button class="setting-btn" onclick="importData()">Import Data</button>
+  <button class="setting-btn" onclick="customCloak()">Custom Cloak (Title + Icon)</button>
+
+  <button class="setting-btn" onclick="uploadMusic()">Upload Background Music</button>
+  <button class="setting-btn" onclick="stopMusic()">Stop Music</button>
+
+</div>
+
+
+<audio id="bg-music" loop style="display:none;"></audio>
+
+
+
+<div class="bottom-bar">
+  <a href="g.html"><img src="https://www.svgrepo.com/show/326649/game-controller-outline.svg"></a>
+  <a href="apps.html"><img src="https://t3.ftcdn.net/jpg/15/88/15/36/360_F_1588153698_7iJuiX3nGooQmQf7piMer4Y7oUYJWrU4.webp"></a>
+  <a href="ideas.html"><img src="https://static.thenounproject.com/png/2162450-200.png"></a>
+  <a href="index.html"><img src="home.svg"></a>
+  <a href="settings.html"><img src="setting.svg"></a>
+</div>
+
+<script>
+
+function spawnShape() {
+  const shape = document.createElement("div");
+  shape.className = "shape";
+  const size = Math.random() * 25 + 10;
+  shape.style.width = size + "px";
+  shape.style.height = size + "px";
+  shape.style.left = Math.random() * 100 + "vw";
+  shape.style.animationDuration = (Math.random() * 5 + 4) + "s";
+  document.body.appendChild(shape);
+  setTimeout(() => shape.remove(), 10000);
+}
+setInterval(spawnShape, 200);
+
+
+
+window.addEventListener("load", () => {
+  const saved = localStorage.getItem("bg-music");
+  if (saved) {
+    const audio = document.getElementById("bg-music");
+    audio.src = saved;
+    audio.play().catch(() => {});
+  }
+});
+
+
+
+function uploadMusic() {
+  const input = document.createElement("input");
+  input.type = "file";
+  input.accept = "audio/*";
+
+  input.onchange = e => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      localStorage.setItem("bg-music", reader.result);
+      const audio = document.getElementById("bg-music");
+      audio.src = reader.result;
+      audio.play();
+      alert("Background music updated!");
+    };
+
+    reader.readAsDataURL(file);
+  };
+
+  input.click();
+}
+
+function stopMusic() {
+  const audio = document.getElementById("bg-music");
+  audio.pause();
+  audio.currentTime = 0;
+}
+
+
+
+function cloak() {
+  const win = window.open("about:blank", "_blank");
+  win.document.write(`<iframe src="${location.href}" style="width:100vw;height:100vh;border:none;"></iframe>`);
+}
+
+
+function exportData() {
+  const data = JSON.stringify(localStorage);
+  const blob = new Blob([data], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "site-data.json";
+  a.click();
+}
+
+
+function importData() {
+  const input = document.createElement("input");
+  input.type = "file";
+  input.accept = ".json";
+
+  input.onchange = e => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      const data = JSON.parse(reader.result);
+      for (let key in data) {
+        localStorage.setItem(key, data[key]);
+      }
+      alert("Data imported! Reloading page...");
+      location.reload();
+    };
+
+    reader.readAsText(file);
+  };
+
+  input.click();
+}
+
+
+function customCloak() {
+  const title = prompt("Enter tab title:");
+  const iconURL = prompt("Enter favicon URL:");
+
+  if (title) localStorage.setItem("cloak-title", title);
+  if (iconURL) localStorage.setItem("cloak-icon", iconURL);
+
+  applyCloak();
+  alert("Cloak updated!");
+}
+
+function applyCloak() {
+  const title = localStorage.getItem("cloak-title");
+  const icon = localStorage.getItem("cloak-icon");
+
+  if (title) document.title = title;
+  if (icon) {
+    let link = document.querySelector("link[rel='icon']");
+    if (!link) {
+      link = document.createElement("link");
+      link.rel = "icon";
+      document.head.appendChild(link);
+    }
+    link.href = icon;
+  }
+}
+
+applyCloak();
+</script>
+
+</body>
+</html>

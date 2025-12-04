@@ -16,7 +16,6 @@
       position: relative;
     }
 
-  
     .shape {
       position: fixed;
       top: -100px;
@@ -50,7 +49,6 @@
       z-index: 10;
     }
 
-
     .game-square {
       background: rgba(255,255,255,0.1);
       border: 2px solid rgba(255,255,255,0.3);
@@ -68,11 +66,10 @@
       border-color: rgba(255,255,255,0.7);
     }
 
-    
     .game-square img {
       width: 100%;
-      height: 100px; 
-      object-fit: cover; 
+      height: 100px;
+      object-fit: cover;
       display: block;
       margin-bottom: 5px;
     }
@@ -83,7 +80,6 @@
       padding: 10px 5px;
     }
 
-    
     .bottom-bar {
       position: fixed;
       bottom: 20px;
@@ -111,6 +107,48 @@
       transform: scale(1.15);
       opacity: 1;
     }
+
+    
+    #launcher {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.75);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 50;
+    }
+
+    .launcher-box {
+      background: #111;
+      padding: 25px;
+      border-radius: 15px;
+      width: 300px;
+      text-align: center;
+      border: 2px solid #444;
+    }
+
+    .version-btn {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      background: #333;
+      border: none;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+
+    .version-btn:hover {
+      background: #444;
+    }
+
+    .close {
+      margin-top: 15px;
+      color: #bbb;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -133,10 +171,32 @@
     <div class="game-title">Undertale</div>
   </a>
 
+  
+  <div class="game-square" onclick="openLauncher()">
+    <img src="games/minecraft.png" alt="Eaglercraft">
+    <div class="game-title">Eaglercraft</div>
+  </div>
+
+
+
 <a href="iframe.html?game=game4" class="game-square">
-  <img src="games/minecraft.png" alt='Eaglercraft">
-  <div class="game-title">Eaglercraft</div>
-</div>    
+  <img src="games/snow-rider.png" alt="Snow Rider">
+  <div class="game-title">Snow Rider</div>
+ </a>
+</div>
+
+  
+<div id="launcher">
+  <div class="launcher-box">
+    <h2>Select Version</h2>
+
+    <button class="version-btn" onclick="loadVersion('games/eaglercraft/1.5.2/index.html')">Eaglercraft 1.5.2</button>
+    <button class="version-btn" onclick="loadVersion('games/eaglercraft/1.8/index.html')">Eaglercraft 1.8</button>
+    <button class="version-btn" onclick="loadVersion('games/eaglercraft/1.12/index.html')">Eaglercraft 1.12</button>
+
+    <div class="close" onclick="closeLauncher()">Close</div>
+  </div>
+</div>
 
 
 <div class="bottom-bar">
@@ -158,19 +218,30 @@
 </div>
 
 <script>
-  
-  function spawnShape() {
-    const shape = document.createElement('div');
-    shape.className = 'shape';
-    const size = Math.random() * 25 + 10;
-    shape.style.width = size + 'px';
-    shape.style.height = size + 'px';
-    shape.style.left = Math.random() * 100 + 'vw';
-    shape.style.animationDuration = (Math.random() * 5 + 4) + 's';
-    document.body.appendChild(shape);
-    setTimeout(() => shape.remove(), 10000);
-  }
-  setInterval(spawnShape, 200);
+function spawnShape() {
+  const shape = document.createElement('div');
+  shape.className = 'shape';
+  const size = Math.random() * 25 + 10;
+  shape.style.width = size + 'px';
+  shape.style.height = size + 'px';
+  shape.style.left = Math.random() * 100 + 'vw';
+  shape.style.animationDuration = (Math.random() * 5 + 4) + 's';
+  document.body.appendChild(shape);
+  setTimeout(() => shape.remove(), 10000);
+}
+setInterval(spawnShape, 200);
+
+function openLauncher() {
+  document.getElementById("launcher").style.display = "flex";
+}
+
+function closeLauncher() {
+  document.getElementById("launcher").style.display = "none";
+}
+
+function loadVersion(path) {
+  window.location.href = "iframe.html?game=" + encodeURIComponent(path);
+}
 </script>
 
 </body>
