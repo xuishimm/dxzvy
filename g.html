@@ -39,15 +39,16 @@
       z-index: 10;
     }
 
-    .game-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 20px;
-      max-width: 1000px;
-      margin: 0 auto;
-      position: relative;
-      z-index: 10;
-    }
+.game-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* adjust the number of columns as needed AND NO this was not ai i wrote this lil tip so i remember SKIDS*/
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+}
+
 
     .game-square {
       background: rgba(255,255,255,0.1);
@@ -201,19 +202,19 @@
 
 <div class="bottom-bar">
   <a href="index.html">
-    <img src="icons/" />
+    <img src="icons/home.svg" />
+  </a>
+  <a href="g.html">
+    <img src="icons/games.svg" />
   </a>
   <a href="apps.html">
     <img src="icons/apps.svg" />
   </a>
-  <a href="ideas.html">
-    <img src="https://static.thenounproject.com/png/2162450-200.png" />
-  </a>
-  <a href="index.html">
-    <img src="icons/home.svg" />
-  </a>
   <a href="settings.html">
     <img src="icons/setting.svg" />
+  </a>
+  <a href="ideas.html">
+    <img src="icons/ideas.svg" />
   </a>
 </div>
 
