@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<title>Bio</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<style>
+		@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+		:root{
+			--shape-min: 18px;
+			--shape-max: 48px;
+			--shape-count: 60;  
+		}
+
+		html,body{height:100%;}
+		body {
+			margin: 0;
+			font-family: 'Poppins', sans-serif;
+			background: #000;
+			overflow: hidden;
+			color: #fff;
+		}
+
+		
+		.shapes-layer{
+			position: fixed;
+			inset: 0;
+			pointer-events: none;
+			z-index: 1;
+			overflow: hidden;
+		}
+
+		.shape {
+			position: absolute;
+			top: -150px; 
+			width: 24px;
+			height: 24px;
+			background: rgba(255, 255, 255, 0.12);
+			animation: fall linear infinite;
+			transform: rotate(45deg);
+			border-radius: 6px;
+			box-shadow: 0 4px 18px rgba(255,255,255,0.03);
+			backdrop-filter: blur(0.5px);
+		}
+
+		@keyframes fall {
+			to {
+				transform: translateY(120vh) rotate(360deg);
+			}
+		}
+
+		
+		.panel-wrap{
+			position: relative;
+			z-index: 10;
+			min-height: 100vh;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 40px 24px;
+		}
+
+		.panel {
+			width: 86vw;           
+			max-width: 1200px;
+			height: 72vh;         
+			border-radius: 28px;
+			background: rgba(255,255,255,0.03);
+			border: 1px solid rgba(255,255,255,0.04);
+			box-shadow: 0 10px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: flex-start;
+			padding: 48px 32px;
+			backdrop-filter: blur(8px) saturate(120%);
+			gap: 18px;
+		}
+
+		.center {
+			text-align: center;
+			margin-top: 20px;
+			position: relative;
+			z-index: 12;
+			color: #fff;
+		}
+
+		h1 {
+			font-size: 3.2rem;
+			font-weight: 600;
+			margin: 0;
+		}
+
+		.search-box {
+			margin-top: 30px;
+		}
+
+		.search-box input {
+			width: 520px; 
+			max-width: 86%;
+			padding: 18px;
+			border-radius: 60px;
+			border: 2px solid rgba(0, 0, 0, 0.6);
+			font-size: 1.1rem;
+			text-align: center;
+			background: rgba(255, 255, 255, 0.08);
+			color: #fff;
+			outline: none;
+			transition: 0.3s;
+			box-shadow: 0 8px 30px rgba(255, 255, 255, 0.03);
+		}
+
+		.search-box input:focus {
+			border-color: rgba(255,255,255,0.12);
+		}
+
+		.icons {
+			margin-top: 36px;
+			display: flex;
+			justify-content: center;
+			gap: 20px;
+		}
+
+		.icons img {
+			width: 72px;
+			height: 72px;
+			border-radius: 16px;
+			transition: 0.25s;
+			cursor: pointer;
+		}
+
+		.icons img:hover {
+			transform: scale(1.08);
+			filter: brightness(1.25);
+		}
+
+		.bottom-bar {
+			position: fixed;
+			bottom: 20px;
+			left: 50%;
+			transform: translateX(-50%);
+			background: rgba(255, 255, 255, 0.03);
+			padding: 12px 25px;
+			border-radius: 20px;
+			display: flex;
+			gap: 25px;
+			backdrop-filter: blur(10px);
+			z-index: 15;
+		}
+
+		.bottom-bar img {
+			width: 36px;
+			height: 36px;
+			filter: invert(1);
+			opacity: 0.9;
+			cursor: pointer;
+			transition: 0.25s;
+		}
+
+		.bottom-bar img:hover {
+			transform: scale(1.15);
+			opacity: 1;
+		}
+
+		
+		@media (max-width:720px){
+			.panel{ width:94vw; height:78vh; padding:28px; }
+			h1{ font-size:2rem }
+			.search-box input{ width:92% }
+		}
+		</style>
+	</head>
+	<body>
+		<div class="shapes-layer" id="shapes"></div>
+
+		<main class="panel-wrap">
+			<section class="panel">
+				<div class="center">
+					<h1>oofer/cixot</h1>
+
+				<div>
+                    <p>Hi, im oofer/victor and i can code html, ccs and im in the process of learning js</p>
+                    <p>I like games like roblox, minecraft, phasmaphobia, supermarket together, portal 1 and 2 and industrial games</p>
+                    <p>Some projects im working on/apart of is dxzvy's sanctuary, porting msc [and] rimworld, and endis</p>
+                </div>
+						<img src="icons/html.svg" alt="html">
+						<img src="icons/css.svg" alt="css">
+						<img src="icons/js.svg" alt="js">
+					</div>
+				</div>
+			</section>
+		</main>
+
+		
+
+		<script>
+		
+		(function(){
+			const container = document.getElementById('shapes');
+			const count = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--shape-count')) || 50;
+			const min = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--shape-min')) || 14;
+			const max = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--shape-max')) || 48;
+
+			function rand(minv, maxv){ return Math.random()*(maxv-minv)+minv }
+
+			for(let i=0;i<count;i++){
+				const el = document.createElement('div');
+				el.className = 'shape';
+				const size = Math.floor(rand(min, max));
+				el.style.width = size + 'px';
+				el.style.height = size + 'px';
+				el.style.left = Math.floor(rand(-8, 108)) + '%';
+				el.style.opacity = rand(0.06, 0.22).toFixed(2);
+				const duration = rand(8, 26).toFixed(2);
+				el.style.animationDuration = duration + 's';
+				el.style.animationDelay = '-' + rand(0, duration).toFixed(2) + 's';
+				
+				const tint = Math.floor(rand(180,255));
+				el.style.background = `rgba(${tint}, ${tint}, 255, ${el.style.opacity})`;
+				container.appendChild(el);
+			}
+		})();
+		</script>
+	</body>
+</html>
+
